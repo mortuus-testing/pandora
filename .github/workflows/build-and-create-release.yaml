@@ -12,7 +12,7 @@ jobs:
   build-and-create-release:
     strategy:
       matrix:
-        os: [ubuntu-latest, window-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -33,5 +33,6 @@ jobs:
         with:
           files: |
             LICENSE
-            ./build/main.bin
-            ./build/main.exe
+            ./build/pandora-windows.exe
+            ./build/pandora-macos
+            ./build/pandora-linux
