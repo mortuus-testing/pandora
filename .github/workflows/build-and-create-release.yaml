@@ -4,6 +4,10 @@ on:
   push:
     tags: ["**"]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build-and-create-release:
     strategy:
@@ -20,6 +24,8 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
+      - name: 🧰 Installing dependencies
+        run: pip install -r requirements.txt
       - name: 🔨 Build the application
         run: ./scripts/build.sh
       - name: 📜 Release a new version
