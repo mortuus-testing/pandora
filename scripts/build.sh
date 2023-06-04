@@ -37,9 +37,9 @@ other_config_based_on_os() {
     if [[ "$1" == "linux" ]]; then
         echo "--linux-icon=$2"; return
     elif [[ "$1" == "macos" ]]; then
-        echo "--macos-app-icon=$2" "--macos-create-app-bundle"; return
+        echo "--macos-app-icon=$2 --macos-create-app-bundle"; return
     elif [[ "$1" == "windows" ]]; then
-        echo "--windows-icon-from-ico=$2 --windows-icon-template-exe=$2"; return
+        echo "--windows-icon-from-ico=$2"; return
     fi
 }
 
