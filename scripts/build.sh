@@ -37,7 +37,7 @@ other_config_based_on_os() {
     if [[ "$1" == "linux" ]]; then
         echo "--linux-icon=$2"; return
     elif [[ "$1" == "macos" ]]; then
-        echo "--macos-create-app-bundle --macos-app-icon=$2"; return
+        echo "--macos-app-icon=$2" "--macos-create-app-bundle"; return
     elif [[ "$1" == "windows" ]]; then
         echo "--windows-icon-from-ico=$2 --windows-icon-template-exe=$2"; return
     fi
@@ -58,8 +58,8 @@ python -m nuitka ${MAIN_FILE} \
     --output-dir=${BUILD_DIR} \
     --enable-plugin=pyside6 \
     --disable-console \
-    --output-filename="${FILENAME}" \
-    "${PLATFORM_SPECIFIC_CONFIG}" \
+    --output-filename=${FILENAME} \
+    ${PLATFORM_SPECIFIC_CONFIG} \
     || raise_error "⛔ Failed to compile the app"
 
 echo "✅ Build complete"
