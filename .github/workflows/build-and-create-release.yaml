@@ -1,0 +1,31 @@
+name: Build and Create Release
+
+on:
+  push:
+    tags: ["**"]
+
+jobs:
+  build-and-create-release:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, window-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    steps:
+      - name: 📦 Checkout the repo
+        uses: actions/checkout@v3
+      - name: 🐍 Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - name: 🔨 Build the application
+        run: ./scripts/build.sh
+      - name: 📜 Release a new version
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            LICENSE
+            ./build/main.bin
+            ./build/main.exe
